@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tidslinjen – lägg historiska händelser i rätt ordning (åk 4–6)</title>
+<meta name="description" content="Lägg historiska händelser från vikingatiden till EU i kronologisk ordning: äldst först. Åk 4–6, gratis och utan inloggning.">
+<meta name="theme-color" content="#faf8f3">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:title" content="Tidslinjen">
+<meta property="og:description" content="Äldst först: ordna historiska händelser på tidslinjen. SV åk 4–6.">
+<meta property="og:image" content="og.png">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="styles.css">
+<script src="https://www.skolappar.com/kotten.js" defer></script>
+</head>
+<body>
+
+<div id="startskarm">
+  <div class="sk-inner">
+    <img class="sk-ikon" src="icon-192.png" alt="" width="96" height="96">
+    <h1>Tidslinjen</h1>
+    <p class="sk-tagline">Äldst eller nyast? Lägg händelserna i rätt ordning.</p>
+    <div class="sk-taggar"><span>Samhälle</span><span>Åk 4–6</span><span>Öva</span></div>
+    <button class="sk-play" id="spela" aria-label="Spela Tidslinjen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+      Spela
+    </button>
+    <p class="sk-fot">Gratis · ingen inloggning · skolappar.com</p>
+    <details class="sk-laroplan">
+      <summary>Läroplanskoppling (Lgr22)</summary>
+      <p><b>Historia, åk 4–6, centralt innehåll:</b> ”Statsbildning och kristendomens etablerande i Norden samt konsekvenser av dessa förändringar.”, ”Kampen om den politiska makten i Norden. Reformationen och framväxten av en stark kungamakt i Sverige. Uppror och motstånd mot kungamakten.” och ”Nya maktförhållanden i Sverige och mellan länder i Norden.”</p>
+      <p>Elva händelser ur perioderna 800–1500, 1500–1800 och fram till idag – Kalmarunionen 1397, Reformationen 1527, förlusten av Finland 1809, EU-medlemskapet 1995 – placeras på tidslinjen äldst först. Efter rätt ordning visas årstalet för varje kort, så barnet kopplar händelsen till perioden. Inga år står på korten innan dess: ordningen ska fram ur kunskapen, inte ur siffrorna. Källor till årtalen: SO-rummet, Världens Historia, Riksarkivet, Regeringen.se, Riksdagen.se och.wikipedia.org (Sveriges historia). Lgr22-citat: Skolverket, läroplanen för grundskolan.</p>
+    </details>
+  </div>
+</div>
+
+<main id="spel" hidden>
+  <header class="hud">
+    <div class="niva" id="niva" aria-label="nivå"></div>
+    <div class="stjarnor" id="stjarnor" aria-label="stjärnor"></div>
+    <button class="ikon-knapp" id="ljud" aria-label="Ljud på eller av">
+      <svg viewBox="0 0 24 24" aria-hidden="true" id="ljudikon"></svg>
+    </button>
+  </header>
+
+  <div class="fraga"><span id="fraga">Vilket hände först? Lägg äldst till vänster.</span></div>
+
+  <div class="axel" aria-hidden="true">
+    <span id="axelbakre">◄ Äldst</span>
+    <span id="axelframre">Nyast ►</span>
+  </div>
+  <div class="tidslinje" id="tidslinje" aria-label="tidslinje, äldst till vänster"></div>
+
+  <div class="kort-ruta">
+    <div id="kort" aria-label="händelsekort att välja mellan"></div>
+  </div>
+
+  <p class="faktaruta" id="faktaruta"></p>
+</main>
+
+<div id="overlay" hidden>
+  <div class="ov-inner">
+    <img class="ov-bild" id="ov-bild" alt="" width="112" height="112">
+    <div class="ov-stjarnor" id="ov-stjarnor"></div>
+    <h2 id="ov-titel"></h2>
+    <div class="ov-knappar">
+      <button class="knapp stor" id="ov-nasta">Nästa nivå</button>
+      <button class="knapp tyst" id="ov-om" hidden>Spela igen</button>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -45,16 +45,14 @@
   }
   var senasteTal = 0;
   function sag(text) {
-    if (!S.ljud || !('speechSynthesis' in window)) return;
-    try {
-      var nu = Date.now();
-      if (nu - senasteTal < 200) return;
-      senasteTal = nu;
-      window.speechSynthesis.cancel();
-      var u = new SpeechSynthesisUtterance(text);
-      u.lang = 'sv-SE'; u.rate = 0.97; u.pitch = 1.04;
-      window.speechSynthesis.speak(u);
-    } catch (e) {}
+    /* Färdiga mp3-filer ur ljud/ (se ljud/lines.js) – ingen talsyntes, så rösten
+       låter likadant i alla webbläsare. Saknas filen blir det tyst. */
+    if (!S.ljud) return;
+    var nu = Date.now();
+    if (nu - senasteTal < 200) return;
+    senasteTal = nu;
+    try { if (window.__rost && window.__rost(text, true)) return; } catch (e) {}
+    try { if (window.console && window.__rostFinns && !window.__rostFinns(text)) console.warn('saknar mp3:', text); } catch (e) {}
   }
   function ritaLjudikon() {
     el.ljudikon.innerHTML = S.ljud
@@ -164,7 +162,7 @@
       blipp(520, 0.12); setTimeout(function () { blipp(700, 0.16); }, 110);
     }
     render();
-    sag('Bra ordning! Först ' + ars[0] + '. Till sist ' + ars[ars.length - 1] + '.');
+    sag('Bra ordning!');
     setTimeout(nasta, 2200);
   }
 
@@ -232,7 +230,7 @@
     visaOverlay('Nivå ' + S.niva + ' klar!', 'Nästa nivå', false);
     blipp(660, 0.1); setTimeout(function () { blipp(880, 0.1); }, 110);
     setTimeout(function () { blipp(1100, 0.22); }, 230);
-    sag('Nivå ' + S.niva + ' klar!');
+    sag('Nivå klar!');
   }
 
   function slut() {
@@ -241,7 +239,7 @@
     visaOverlay('Alla nivåer klara! ' + S.stjarnor + ' av ' + TOTALT + ' stjärnor', 'Spela igen', true);
     blipp(660, 0.1); setTimeout(function () { blipp(880, 0.1); }, 110);
     setTimeout(function () { blipp(1100, 0.22); }, 230);
-    sag('Alla nivåer klara! Du fick ' + S.stjarnor + ' stjärnor av ' + TOTALT + '.');
+    sag('Alla nivåer klara!');
     handelse('round_done', Math.round(100 * S.stjarnor / TOTALT));
   }
 
@@ -291,7 +289,7 @@
   el.ljud.addEventListener('click', function () {
     S.ljud = !S.ljud;
     if (!S.ljud) {
-      try { window.speechSynthesis.cancel(); } catch (e) {}
+      try { if (window.__rostStopp) window.__rostStopp(); } catch (e) {}
       handelse('sound_off');
     }
     ritaLjudikon();
